@@ -5,11 +5,11 @@ AxKit has a very powerful Taglib architecture that allows you to
 separate you content from your presentation.
 
 This module provides an alternative to taglibs. The general philosphy
-here is to repond to http requests with perl cgi scripts. Such scripts
+here is to respond to http requests with perl cgi scripts. Such scripts
 perform two duties. First, they generate content. Second, they determine
 the stylesheet for presenting the content. The cgi scripts do not
 generate the stylesheets. They simply determine which stylesheet should
-be used for presentation.i
+be used for presentation.
 
 CGI scripts must contain a "content()" subroutine that returns a hashref
 containing the generated content, and optionally, the name of a stylesheet.

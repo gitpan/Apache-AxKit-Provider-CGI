@@ -13,7 +13,7 @@ our %EXPORT_TAGS = ( 'all' => [ qw() ] );
 our @EXPORT_OK = ( @{ $EXPORT_TAGS{'all'} } );
 our @EXPORT = qw();
 
-our $VERSION = '0.01';
+our $VERSION = '0.02';
 
 use Apache;
 use Apache::Log;
@@ -36,7 +36,6 @@ sub get_strref {
     require $self->{file};
     my ($response, $stylesheet) = content();
     delete $INC{$self->{file}};
-    $self->{dyn_stylesheet} = $stylesheet;
 
     my $xml = ($stylesheet ? "<?xml-stylesheet href=\"$stylesheet\" type=\"text/xsl\" ?>\n" : '');
     $xml .= XML::Simple::XMLout($response, 'keyattr'=>[], 'rootname'=>'response', 'noattr'=>1);
@@ -90,17 +89,17 @@ Apache::AxKit::Provider::CGI - CGI generated XML content without Taglibs
   separate you content from your presentation.
 
   This module provides an alternative to taglibs. The general philosphy
-  here is to repond to http requests with perl cgi scripts. Such scripts
+  here is to respond to http requests with perl CGI scripts. Such scripts
   perform two duties. First, they generate content. Second, they determine
-  the stylesheet for presenting the content. The cgi scripts do not
+  the stylesheet for presenting the content. The CGI scripts do not
   generate the stylesheets. They simply determine which stylesheet should
-  be used for presentation.i
+  be used for presentation.
 
   CGI scripts must contain a "content()" subroutine that returns a hashref 
   containing the generated content, and optionally, the name of a stylesheet.
 
   The hashref is converted to XML and wrapped in a <response> tag using
-  XML::Simple. If the cgi script specifies a stylesheet, an appropriate
+  XML::Simple. If the CGI script specifies a stylesheet, an appropriate
   processing instruction is prepended to the xml document.
 
   This xml document is then provided to AxKit for further processing.
@@ -179,13 +178,13 @@ Sean McMurray
 
 =head1 COPYRIGHT AND LICENSE
 
-Copyright 2003 by root
+Copyright 2003 by Sean McMurray
 
 This library is free software; you can redistribute it and/or modify
 it under the same terms as Perl itself. 
 
 =head1 VERSION
 
-  0.01
+  0.02
 
 =cut
